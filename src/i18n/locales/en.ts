@@ -1,0 +1,81 @@
+export default {
+  nav: {
+    experiences: "Experiences",
+    guides: "Guides",
+    howItWorks: "How it works",
+    becomeGuide: "Become a guide",
+    login: "Log in",
+    signup: "Sign up",
+  },
+  hero: {
+    badge: "Catania province · Authentic experiences",
+    title: "Mount Etna like you've never lived it",
+    subtitle:
+      "Connect directly with local guides. Tailor-made, niche experiences, with no middlemen.",
+    ctaPrimary: "Explore experiences",
+    ctaSecondary: "Become a guide",
+    stat1: "+50 local guides",
+    stat2: "4.9 ★ average rating",
+    stat3: "0% agency fees",
+  },
+  categories: {
+    title: "Four ways to live Etna",
+    subtitle: "Pick your experience, personalize it with your guide.",
+    trekking: {
+      title: "Summit trekking",
+      desc: "Summit craters, Valle del Bove, hikes with certified volcanological guides.",
+    },
+    panoramic: {
+      title: "Panoramic & photo tours",
+      desc: "Sunsets, scenic spots, guided photo sessions on the volcano's slopes.",
+    },
+    food: {
+      title: "Food & wine",
+      desc: "Etna DOC wineries, street food, historic bars and authentic village restaurants.",
+    },
+    culture: {
+      title: "Culture & villages",
+      desc: "Baroque Catania, Acireale, Etna villages and historic markets told by locals.",
+    },
+  },
+  guides: {
+    title: "Our local guides",
+    subtitle: "Real people, real experiences. Choose who'll guide you.",
+    viewProfile: "View profile",
+    experiences: "experiences",
+    guide1: { name: "Marco Lo Giudice", role: "Volcanological guide", bio: "20 years on Etna's trails. Specialized in summit crater treks." },
+    guide2: { name: "Giulia Russo", role: "Cultural guide", bio: "Born in Catania, I take you through baroque alleys tour buses never see." },
+    guide3: { name: "Salvatore Pennisi", role: "Sommelier & food guide", bio: "Three generations of winemakers. Wineries, food and traditions." },
+  },
+  how: {
+    title: "How it works",
+    subtitle: "Simple, direct, no middlemen.",
+    s1: { title: "Choose your guide", desc: "Browse profiles, reviews and photos. Find your match." },
+    s2: { title: "Chat & customize", desc: "Direct chat. Build your tailor-made experience together." },
+    s3: { title: "Book & live it", desc: "Secure payment. Your guide is waiting. You enjoy the experience." },
+  },
+  why: {
+    title: "Why ETNA",
+    subtitle: "A new model that changes local tourism.",
+    p1: { title: "Zero middlemen", desc: "Just a 15% fee. You save, your guide earns more." },
+    p2: { title: "Niche experiences", desc: "No standard tours. Every experience is unique, built on your wishes." },
+    p3: { title: "100% verified locals", desc: "Only guides from Catania province, verified with real reviews." },
+    p4: { title: "Direct chat", desc: "Talk directly with your guide. No call centers." },
+  },
+  ctaBanner: {
+    title: "Are you a local guide?",
+    subtitle: "Join ETNA and reach travelers from around the world. Keep 85% of every booking.",
+    button: "Become a guide",
+  },
+  footer: {
+    tagline: "Authentic experiences on Mount Etna.",
+    explore: "Explore",
+    company: "Company",
+    about: "About",
+    contact: "Contact",
+    legal: "Legal",
+    terms: "Terms",
+    privacy: "Privacy",
+    rights: "All rights reserved.",
+  },
+};
