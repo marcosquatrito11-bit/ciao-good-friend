@@ -1,0 +1,81 @@
+export default {
+  nav: {
+    experiences: "Esperienze",
+    guides: "Guide",
+    howItWorks: "Come funziona",
+    becomeGuide: "Diventa guida",
+    login: "Accedi",
+    signup: "Registrati",
+  },
+  hero: {
+    badge: "Provincia di Catania · Esperienze autentiche",
+    title: "L'Etna come non l'hai mai vissuta",
+    subtitle:
+      "Connettiti direttamente con guide e accompagnatori locali. Esperienze su misura, di nicchia, senza intermediari.",
+    ctaPrimary: "Esplora le esperienze",
+    ctaSecondary: "Diventa accompagnatore",
+    stat1: "+50 guide locali",
+    stat2: "4,9 ★ rating medio",
+    stat3: "0% costi d'agenzia",
+  },
+  categories: {
+    title: "Quattro modi di vivere l'Etna",
+    subtitle: "Scegli la tua esperienza, personalizzala con la guida.",
+    trekking: {
+      title: "Trekking in quota",
+      desc: "Crateri sommitali, Valle del Bove, escursioni con guide vulcanologiche certificate.",
+    },
+    panoramic: {
+      title: "Tour panoramici e foto",
+      desc: "Tramonti, punti scenografici, sessioni fotografiche guidate sui versanti del vulcano.",
+    },
+    food: {
+      title: "Enogastronomia etnea",
+      desc: "Cantine del vino Etna DOC, street food, bar storici e ristoranti tipici nei paesi del vulcano.",
+    },
+    culture: {
+      title: "Cultura, città e borghi",
+      desc: "Catania barocca, Acireale, borghi etnei, mercati storici raccontati da chi ci è nato.",
+    },
+  },
+  guides: {
+    title: "Le nostre guide locali",
+    subtitle: "Persone vere, esperienze vere. Scegli chi ti accompagnerà.",
+    viewProfile: "Vedi profilo",
+    experiences: "esperienze",
+    guide1: { name: "Marco Lo Giudice", role: "Guida vulcanologica", bio: "20 anni sui sentieri dell'Etna. Specializzato in trekking ai crateri sommitali." },
+    guide2: { name: "Giulia Russo", role: "Guida culturale", bio: "Catanese DOC, ti porto nei vicoli barocchi che i tour bus non vedono mai." },
+    guide3: { name: "Salvatore Pennisi", role: "Sommelier & food guide", bio: "Famiglia di vignaioli da tre generazioni. Cantine, cibo e tradizioni." },
+  },
+  how: {
+    title: "Come funziona",
+    subtitle: "Semplice, diretto, senza intermediari.",
+    s1: { title: "Scegli la tua guida", desc: "Sfoglia profili, recensioni e foto. Trova chi fa per te." },
+    s2: { title: "Chatta e personalizza", desc: "Contatto diretto in chat. Costruite insieme l'esperienza su misura." },
+    s3: { title: "Prenota e vivi", desc: "Pagamento sicuro. La guida ti aspetta. Tu vivi l'esperienza." },
+  },
+  why: {
+    title: "Perché ETNA",
+    subtitle: "Il modello che cambia le regole del turismo locale.",
+    p1: { title: "Zero intermediari", desc: "Solo 15% di commissione. Risparmi tu, guadagna di più chi ti accompagna." },
+    p2: { title: "Esperienze di nicchia", desc: "Niente tour standard. Ogni esperienza è unica, costruita sui tuoi desideri." },
+    p3: { title: "100% locali verificati", desc: "Solo guide della provincia di Catania, verificate e con recensioni reali." },
+    p4: { title: "Chat diretta", desc: "Parli direttamente con chi ti accompagnerà. Niente call center." },
+  },
+  ctaBanner: {
+    title: "Sei una guida o un accompagnatore locale?",
+    subtitle: "Unisciti a ETNA e raggiungi turisti da tutto il mondo. Trattieni l'85% di ogni prenotazione.",
+    button: "Diventa accompagnatore",
+  },
+  footer: {
+    tagline: "Esperienze autentiche sull'Etna.",
+    explore: "Esplora",
+    company: "Azienda",
+    about: "Chi siamo",
+    contact: "Contatti",
+    legal: "Legale",
+    terms: "Termini",
+    privacy: "Privacy",
+    rights: "Tutti i diritti riservati.",
+  },
+};
