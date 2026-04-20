@@ -38,7 +38,7 @@ export const Navbar = () => {
           <span className="grid place-items-center size-9 rounded-lg gradient-lava shadow-lava">
             <Mountain className="size-5 text-primary-foreground" />
           </span>
-          <span className={cn(scrolled || open ? "text-foreground" : "text-white")}>ETNA</span>
+          <span className={cn(scrolled || open ? "text-foreground" : "text-white")}>EtnaGo</span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-7">

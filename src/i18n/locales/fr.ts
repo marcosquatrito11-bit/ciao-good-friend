@@ -8,7 +8,7 @@ export default {
     signup: "S'inscrire",
   },
   hero: {
-    badge: "Province de Catane · Expériences authentiques",
+    badge: "EtnaGo · Discover Sicily with locals",
     title: "L'Etna comme vous ne l'avez jamais vécu",
     subtitle:
       "Connectez-vous directement avec des guides locaux. Expériences sur mesure, sans intermédiaires.",
@@ -43,7 +43,7 @@ export default {
     s3: { title: "Réservez & vivez", desc: "Paiement sécurisé. Votre guide vous attend." },
   },
   why: {
-    title: "Pourquoi ETNA",
+    title: "Pourquoi EtnaGo",
     subtitle: "Un nouveau modèle pour le tourisme local.",
     p1: { title: "Zéro intermédiaire", desc: "Seulement 15% de commission. Vous économisez, votre guide gagne plus." },
     p2: { title: "Expériences de niche", desc: "Pas de tours standards. Chaque expérience est unique." },
@@ -52,11 +52,11 @@ export default {
   },
   ctaBanner: {
     title: "Vous êtes un guide local?",
-    subtitle: "Rejoignez ETNA et touchez des voyageurs du monde entier. Gardez 85% de chaque réservation.",
+    subtitle: "Rejoignez EtnaGo et touchez des voyageurs du monde entier. Gardez 85% de chaque réservation.",
     button: "Devenir guide",
   },
   footer: {
-    tagline: "Expériences authentiques sur l'Etna.",
+    tagline: "Discover Sicily with locals. Expériences authentiques sur l'Etna.",
     explore: "Explorer",
     company: "Entreprise",
     about: "À propos",
