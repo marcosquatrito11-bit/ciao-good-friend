@@ -14,7 +14,7 @@ export const Footer = () => {
               <span className="grid place-items-center size-9 rounded-lg gradient-lava">
                 <Mountain className="size-5 text-primary-foreground" />
               </span>
-              ETNA
+              EtnaGo
             </a>
             <p className="text-secondary-foreground/70 text-sm leading-relaxed mb-5">
               {t("footer.tagline")}
@@ -53,7 +53,7 @@ export const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-secondary-foreground/60">
-          <p>© {year} ETNA Experiences. {t("footer.rights")}</p>
+          <p>© {year} EtnaGo. {t("footer.rights")}</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-primary transition-colors">{t("footer.terms")}</a>
             <a href="#" className="hover:text-primary transition-colors">{t("footer.privacy")}</a>
