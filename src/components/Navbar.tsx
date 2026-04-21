@@ -61,12 +61,20 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <Button variant="ghost" size="sm" className={cn("hidden sm:inline-flex", !scrolled && !open && "text-white hover:text-white hover:bg-white/10")}>
-            {t("nav.login")}
-          </Button>
-          <Button size="sm" className="gradient-lava text-primary-foreground border-0 shadow-lava hover:opacity-95">
-            {t("nav.signup")}
-          </Button>
+          {user ? (
+            <Button asChild size="sm" className="gradient-lava text-primary-foreground border-0 shadow-lava hover:opacity-95">
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm" className={cn("hidden sm:inline-flex", !scrolled && !open && "text-white hover:text-white hover:bg-white/10")}>
+                <Link to="/auth">{t("nav.login")}</Link>
+              </Button>
+              <Button asChild size="sm" className="gradient-lava text-primary-foreground border-0 shadow-lava hover:opacity-95">
+                <Link to="/auth">{t("nav.signup")}</Link>
+              </Button>
+            </>
+          )}
           <button
             className={cn("lg:hidden p-2", scrolled || open ? "text-foreground" : "text-white")}
             onClick={() => setOpen((v) => !v)}
