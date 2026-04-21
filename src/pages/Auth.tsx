@@ -42,7 +42,10 @@ const Auth = () => {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword(parsed.data);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: parsed.data.email!,
+      password: parsed.data.password!,
+    });
     setBusy(false);
     if (error) {
       toast.error(error.message === "Invalid login credentials" ? "Email or password incorrect" : error.message);
@@ -65,11 +68,11 @@ const Auth = () => {
     }
     setBusy(true);
     const { error } = await supabase.auth.signUp({
-      email: parsed.data.email,
-      password: parsed.data.password,
+      email: parsed.data.email!,
+      password: parsed.data.password!,
       options: {
         emailRedirectTo: `${window.location.origin}/dashboard`,
-        data: { full_name: parsed.data.displayName },
+        data: { full_name: parsed.data.displayName! },
       },
     });
     setBusy(false);
