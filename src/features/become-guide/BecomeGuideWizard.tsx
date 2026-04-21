@@ -152,14 +152,14 @@ export const BecomeGuideWizard = () => {
         </header>
 
         <Card className="p-6 md:p-8">
-          {step === 1 && <StepPersonal {...stepProps} />}
-          {step === 2 && <StepContact {...stepProps} />}
-          {step === 3 && <StepAbout {...stepProps} />}
-          {step === 4 && <StepLanguages {...stepProps} />}
-          {step === 5 && <StepSpecializations {...stepProps} />}
-          {step === 6 && <StepDocuments {...stepProps} />}
-          {step === 7 && <StepPayments {...stepProps} />}
-          {step === 8 && <StepAgreement {...stepProps} />}
+          {step === 1 && <StepPersonal draft={draft} onNext={next} saving={saving} />}
+          {step === 2 && <StepContact draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 3 && <StepAbout draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 4 && <StepLanguages draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 5 && <StepSpecializations draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 6 && <StepDocuments draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 7 && <StepPayments draft={draft} onNext={next} onBack={back} saving={saving} />}
+          {step === 8 && <StepAgreement draft={draft} onSubmit={submit} onBack={back} saving={saving} />}
         </Card>
 
         <div className="text-center mt-4 text-xs text-muted-foreground">
