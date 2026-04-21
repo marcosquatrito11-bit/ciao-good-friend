@@ -24,7 +24,7 @@ export const Navbar = () => {
     { href: "#categories", label: t("nav.experiences") },
     { href: "#guides", label: t("nav.guides") },
     { href: "#how", label: t("nav.howItWorks") },
-    { href: "#become-guide", label: t("nav.becomeGuide") },
+    { href: "/become-guide", label: t("nav.becomeGuide") },
   ];
 
   return (
