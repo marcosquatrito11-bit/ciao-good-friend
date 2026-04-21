@@ -87,7 +87,7 @@ export const BecomeGuideWizard = () => {
 
   const back = () => setStep((s) => Math.max(1, s - 1));
 
-  const submit = async (patch: Partial<ApplicationDraft>) => {
+  const submit = async (patch: Partial<ApplicationDraft>): Promise<void> => {
     if (!user) return;
     setSaving(true);
     const merged = { ...draft, ...patch };
@@ -105,7 +105,10 @@ export const BecomeGuideWizard = () => {
         { onConflict: "user_id" },
       );
     setSaving(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Application submitted! We'll review it soon.");
     navigate("/dashboard", { replace: true });
   };
