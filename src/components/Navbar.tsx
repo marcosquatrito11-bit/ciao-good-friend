@@ -21,9 +21,9 @@ export const Navbar = () => {
   }, []);
 
   const links = [
-    { href: "#categories", label: t("nav.experiences") },
-    { href: "#guides", label: t("nav.guides") },
-    { href: "#how", label: t("nav.howItWorks") },
+    { href: "/experiences", label: t("nav.experiences") },
+    { href: "/#guides", label: t("nav.guides") },
+    { href: "/#how", label: t("nav.howItWorks") },
     { href: "/become-guide", label: t("nav.becomeGuide") },
   ];
 
@@ -45,18 +45,18 @@ export const Navbar = () => {
         </a>
 
         <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                scrolled ? "text-foreground/80" : "text-white/90",
-              )}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isInternal = l.href.startsWith("/") && !l.href.includes("#");
+            const className = cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              scrolled ? "text-foreground/80" : "text-white/90",
+            );
+            return isInternal ? (
+              <Link key={l.href} to={l.href} className={className}>{l.label}</Link>
+            ) : (
+              <a key={l.href} href={l.href} className={className}>{l.label}</a>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -88,16 +88,15 @@ export const Navbar = () => {
       {open && (
         <nav className="lg:hidden border-t border-border bg-background">
           <div className="container py-4 flex flex-col gap-1">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="py-2.5 text-sm font-medium text-foreground/80 hover:text-primary"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) => {
+              const isInternal = l.href.startsWith("/") && !l.href.includes("#");
+              const className = "py-2.5 text-sm font-medium text-foreground/80 hover:text-primary";
+              return isInternal ? (
+                <Link key={l.href} to={l.href} onClick={() => setOpen(false)} className={className}>{l.label}</Link>
+              ) : (
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={className}>{l.label}</a>
+              );
+            })}
           </div>
         </nav>
       )}
