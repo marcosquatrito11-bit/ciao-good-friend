@@ -14,6 +14,9 @@ import BecomeGuide from "./pages/BecomeGuide.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import GuideExperiences from "./pages/dashboard/GuideExperiences.tsx";
 import AdminApplications from "./pages/dashboard/AdminApplications.tsx";
+import ExperiencesList from "./pages/ExperiencesList.tsx";
+import ExperienceDetail from "./pages/ExperienceDetail.tsx";
+import ExperienceEditor from "./pages/dashboard/ExperienceEditor.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/experiences" element={<ExperiencesList />} />
+            <Route path="/experiences/:slug" element={<ExperienceDetail />} />
             <Route
               path="/become-guide"
               element={
@@ -49,6 +54,22 @@ const App = () => (
                 element={
                   <ProtectedRoute requireRole="guide">
                     <GuideExperiences />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/experiences/new"
+                element={
+                  <ProtectedRoute requireRole="guide">
+                    <ExperienceEditor />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/experiences/:id/edit"
+                element={
+                  <ProtectedRoute requireRole="guide">
+                    <ExperienceEditor />
                   </ProtectedRoute>
                 }
               />
