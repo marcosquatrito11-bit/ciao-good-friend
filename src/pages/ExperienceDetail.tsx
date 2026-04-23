@@ -256,6 +256,37 @@ const ExperienceDetail = () => {
                 <p className="text-sm text-muted-foreground whitespace-pre-line">{exp.requirements}</p>
               </section>
             )}
+
+            <section>
+              <h2 className="font-display text-xl font-semibold mb-3">Reviews ({reviews.length})</h2>
+              {reviews.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No reviews yet. Be the first!</p>
+              ) : (
+                <div className="space-y-3">
+                  {reviews.map((r) => (
+                    <Card key={r.id}>
+                      <CardContent className="p-4 flex gap-3">
+                        <div className="size-9 rounded-full bg-muted overflow-hidden flex-shrink-0">
+                          {r.profiles?.avatar_url && <img src={r.profiles.avatar_url} alt="" className="w-full h-full object-cover" />}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <p className="font-semibold text-sm">{r.profiles?.display_name ?? "Tourist"}</p>
+                            <p className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</p>
+                          </div>
+                          <div className="flex gap-0.5 my-1">
+                            {[1,2,3,4,5].map((n) => (
+                              <Star key={n} className={`size-3 ${n <= r.rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground"}`} />
+                            ))}
+                          </div>
+                          {r.comment && <p className="text-sm text-foreground/90">{r.comment}</p>}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </section>
           </div>
 
           {/* Booking sidebar */}
