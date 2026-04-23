@@ -17,6 +17,12 @@ import AdminApplications from "./pages/dashboard/AdminApplications.tsx";
 import ExperiencesList from "./pages/ExperiencesList.tsx";
 import ExperienceDetail from "./pages/ExperienceDetail.tsx";
 import ExperienceEditor from "./pages/dashboard/ExperienceEditor.tsx";
+import Profile from "./pages/dashboard/Profile.tsx";
+import Favorites from "./pages/dashboard/Favorites.tsx";
+import Messages from "./pages/dashboard/Messages.tsx";
+import MyBookings from "./pages/dashboard/MyBookings.tsx";
+import GuideBookings from "./pages/dashboard/GuideBookings.tsx";
+import GuideProfile from "./pages/GuideProfile.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +39,7 @@ const App = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/experiences" element={<ExperiencesList />} />
             <Route path="/experiences/:slug" element={<ExperienceDetail />} />
+            <Route path="/guides/:id" element={<GuideProfile />} />
             <Route
               path="/become-guide"
               element={
@@ -49,6 +56,18 @@ const App = () => (
               }
             >
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/profile" element={<Profile />} />
+              <Route path="/dashboard/messages" element={<Messages />} />
+              <Route path="/dashboard/bookings" element={<MyBookings />} />
+              <Route path="/dashboard/favorites" element={<Favorites />} />
+              <Route
+                path="/dashboard/guide"
+                element={
+                  <ProtectedRoute requireRole="guide">
+                    <GuideBookings />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/dashboard/experiences"
                 element={

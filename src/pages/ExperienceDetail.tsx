@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Loader2, MapPin, Clock, Users, Check, X, ArrowLeft, CalendarDays } from "lucide-react";
+import { Loader2, MapPin, Clock, Users, Check, X, ArrowLeft, CalendarDays, Heart, Star, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -36,6 +36,7 @@ type Exp = {
 type Guide = { id: string; user_id: string; headline: string | null; bio_long: string | null };
 type Profile = { display_name: string | null; avatar_url: string | null };
 type Slot = { id: string; starts_at: string; spots_left: number };
+type Review = { id: string; rating: number; comment: string | null; created_at: string; tourist_id: string; profiles?: { display_name: string | null; avatar_url: string | null } | null };
 
 const ExperienceDetail = () => {
   const { slug } = useParams();
@@ -50,6 +51,8 @@ const ExperienceDetail = () => {
   const [pax, setPax] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
   const [booking, setBooking] = useState(false);
+  const [isFav, setIsFav] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     if (!slug) return;
@@ -78,9 +81,38 @@ const ExperienceDetail = () => {
         const { data: p } = await supabase.from("profiles").select("display_name, avatar_url").eq("id", g.user_id).maybeSingle();
         setProfile(p as Profile);
       }
+      // reviews
+      const { data: rv } = await supabase.from("reviews").select("id, rating, comment, created_at, tourist_id").eq("experience_id", data.id).order("created_at", { ascending: false }).limit(10);
+      const reviewList = (rv ?? []) as Review[];
+      const tids = [...new Set(reviewList.map((r) => r.tourist_id))];
+      if (tids.length) {
+        const { data: profs } = await supabase.from("profiles").select("id, display_name, avatar_url").in("id", tids);
+        const pm = new Map((profs ?? []).map((x) => [x.id, x]));
+        reviewList.forEach((r) => { r.profiles = pm.get(r.tourist_id) as never; });
+      }
+      setReviews(reviewList);
+      // favorite
+      if (user) {
+        const { data: fav } = await supabase.from("favorites").select("user_id").eq("user_id", user.id).eq("experience_id", data.id).maybeSingle();
+        setIsFav(!!fav);
+      }
       setLoading(false);
     })();
-  }, [slug]);
+  }, [slug, user]);
+
+  const toggleFav = async () => {
+    if (!user) { navigate("/auth"); return; }
+    if (!exp) return;
+    if (isFav) {
+      await supabase.from("favorites").delete().eq("user_id", user.id).eq("experience_id", exp.id);
+      setIsFav(false);
+      toast.success("Removed from favorites");
+    } else {
+      await supabase.from("favorites").insert({ user_id: user.id, experience_id: exp.id });
+      setIsFav(true);
+      toast.success("Added to favorites ❤️");
+    }
+  };
 
   const book = async () => {
     if (!user) { navigate("/auth", { state: { from: window.location.pathname } }); return; }
@@ -123,8 +155,11 @@ const ExperienceDetail = () => {
     <>
       <Navbar />
       <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-        <div className="container py-6">
+        <div className="container py-6 flex items-center justify-between">
           <Button variant="ghost" size="sm" onClick={() => navigate(-1)}><ArrowLeft className="size-4" /> Back</Button>
+          <Button variant="outline" size="sm" onClick={toggleFav}>
+            <Heart className={`size-4 ${isFav ? "fill-destructive text-destructive" : ""}`} /> {isFav ? "Saved" : "Save"}
+          </Button>
         </div>
 
         <div className="container pb-16 grid lg:grid-cols-[1fr_360px] gap-8">
@@ -163,14 +198,21 @@ const ExperienceDetail = () => {
             {profile && guide && (
               <Card>
                 <CardContent className="p-4 flex items-center gap-3">
-                  <div className="size-12 rounded-full bg-muted overflow-hidden">
-                    {profile.avatar_url && <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />}
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Hosted by</p>
-                    <p className="font-semibold">{profile.display_name ?? "Local guide"}</p>
-                    {guide.headline && <p className="text-xs text-muted-foreground">{guide.headline}</p>}
-                  </div>
+                  <Link to={`/guides/${guide.id}`} className="flex items-center gap-3 flex-1 hover:opacity-80">
+                    <div className="size-12 rounded-full bg-muted overflow-hidden">
+                      {profile.avatar_url && <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />}
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Hosted by</p>
+                      <p className="font-semibold">{profile.display_name ?? "Local guide"}</p>
+                      {guide.headline && <p className="text-xs text-muted-foreground">{guide.headline}</p>}
+                    </div>
+                  </Link>
+                  {user && user.id !== guide.user_id && (
+                    <Button size="sm" variant="outline" asChild>
+                      <Link to={`/dashboard/messages?with=${guide.user_id}`}><MessageSquare className="size-4" /> Message</Link>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             )}
@@ -214,6 +256,37 @@ const ExperienceDetail = () => {
                 <p className="text-sm text-muted-foreground whitespace-pre-line">{exp.requirements}</p>
               </section>
             )}
+
+            <section>
+              <h2 className="font-display text-xl font-semibold mb-3">Reviews ({reviews.length})</h2>
+              {reviews.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No reviews yet. Be the first!</p>
+              ) : (
+                <div className="space-y-3">
+                  {reviews.map((r) => (
+                    <Card key={r.id}>
+                      <CardContent className="p-4 flex gap-3">
+                        <div className="size-9 rounded-full bg-muted overflow-hidden flex-shrink-0">
+                          {r.profiles?.avatar_url && <img src={r.profiles.avatar_url} alt="" className="w-full h-full object-cover" />}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <p className="font-semibold text-sm">{r.profiles?.display_name ?? "Tourist"}</p>
+                            <p className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</p>
+                          </div>
+                          <div className="flex gap-0.5 my-1">
+                            {[1,2,3,4,5].map((n) => (
+                              <Star key={n} className={`size-3 ${n <= r.rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground"}`} />
+                            ))}
+                          </div>
+                          {r.comment && <p className="text-sm text-foreground/90">{r.comment}</p>}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </section>
           </div>
 
           {/* Booking sidebar */}

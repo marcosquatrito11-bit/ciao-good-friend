@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { Mountain, LogOut, LayoutDashboard, ClipboardList, Compass, ShieldCheck } from "lucide-react";
+import { Mountain, LogOut, LayoutDashboard, ClipboardList, Compass, ShieldCheck, Heart, MessageSquare, CalendarDays, User, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -41,20 +41,41 @@ export const DashboardLayout = () => {
             <NavLink to="/dashboard" end className={({ isActive }) => cn(item, isActive && active)}>
               <LayoutDashboard className="size-4" /> Overview
             </NavLink>
+            <NavLink to="/dashboard/profile" className={({ isActive }) => cn(item, isActive && active)}>
+              <User className="size-4" /> Profile
+            </NavLink>
+            <NavLink to="/dashboard/messages" className={({ isActive }) => cn(item, isActive && active)}>
+              <MessageSquare className="size-4" /> Messages
+            </NavLink>
+            <NavLink to="/dashboard/bookings" className={({ isActive }) => cn(item, isActive && active)}>
+              <CalendarDays className="size-4" /> My bookings
+            </NavLink>
+            <NavLink to="/dashboard/favorites" className={({ isActive }) => cn(item, isActive && active)}>
+              <Heart className="size-4" /> Favorites
+            </NavLink>
             {!isGuide && !isAdmin && (
               <NavLink to="/become-guide" className={({ isActive }) => cn(item, isActive && active)}>
                 <ClipboardList className="size-4" /> Become a guide
               </NavLink>
             )}
             {isGuide && (
-              <NavLink to="/dashboard/experiences" className={({ isActive }) => cn(item, isActive && active)}>
-                <Compass className="size-4" /> My experiences
-              </NavLink>
+              <>
+                <div className="pt-2 px-3 text-[10px] font-semibold uppercase text-muted-foreground">Guide</div>
+                <NavLink to="/dashboard/guide" className={({ isActive }) => cn(item, isActive && active)}>
+                  <BarChart3 className="size-4" /> Stats & bookings
+                </NavLink>
+                <NavLink to="/dashboard/experiences" className={({ isActive }) => cn(item, isActive && active)}>
+                  <Compass className="size-4" /> My experiences
+                </NavLink>
+              </>
             )}
             {isAdmin && (
-              <NavLink to="/dashboard/admin" className={({ isActive }) => cn(item, isActive && active)}>
-                <ShieldCheck className="size-4" /> Admin
-              </NavLink>
+              <>
+                <div className="pt-2 px-3 text-[10px] font-semibold uppercase text-muted-foreground">Admin</div>
+                <NavLink to="/dashboard/admin" className={({ isActive }) => cn(item, isActive && active)}>
+                  <ShieldCheck className="size-4" /> Applications
+                </NavLink>
+              </>
             )}
           </nav>
         </aside>
