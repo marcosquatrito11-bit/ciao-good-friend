@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Loader2, MapPin, Clock, Users, Check, X, ArrowLeft, CalendarDays } from "lucide-react";
+import { Loader2, MapPin, Clock, Users, Check, X, ArrowLeft, CalendarDays, Heart, Star, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -36,6 +36,7 @@ type Exp = {
 type Guide = { id: string; user_id: string; headline: string | null; bio_long: string | null };
 type Profile = { display_name: string | null; avatar_url: string | null };
 type Slot = { id: string; starts_at: string; spots_left: number };
+type Review = { id: string; rating: number; comment: string | null; created_at: string; tourist_id: string; profiles?: { display_name: string | null; avatar_url: string | null } | null };
 
 const ExperienceDetail = () => {
   const { slug } = useParams();
@@ -50,6 +51,8 @@ const ExperienceDetail = () => {
   const [pax, setPax] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
   const [booking, setBooking] = useState(false);
+  const [isFav, setIsFav] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     if (!slug) return;
@@ -78,9 +81,38 @@ const ExperienceDetail = () => {
         const { data: p } = await supabase.from("profiles").select("display_name, avatar_url").eq("id", g.user_id).maybeSingle();
         setProfile(p as Profile);
       }
+      // reviews
+      const { data: rv } = await supabase.from("reviews").select("id, rating, comment, created_at, tourist_id").eq("experience_id", data.id).order("created_at", { ascending: false }).limit(10);
+      const reviewList = (rv ?? []) as Review[];
+      const tids = [...new Set(reviewList.map((r) => r.tourist_id))];
+      if (tids.length) {
+        const { data: profs } = await supabase.from("profiles").select("id, display_name, avatar_url").in("id", tids);
+        const pm = new Map((profs ?? []).map((x) => [x.id, x]));
+        reviewList.forEach((r) => { r.profiles = pm.get(r.tourist_id) as never; });
+      }
+      setReviews(reviewList);
+      // favorite
+      if (user) {
+        const { data: fav } = await supabase.from("favorites").select("user_id").eq("user_id", user.id).eq("experience_id", data.id).maybeSingle();
+        setIsFav(!!fav);
+      }
       setLoading(false);
     })();
-  }, [slug]);
+  }, [slug, user]);
+
+  const toggleFav = async () => {
+    if (!user) { navigate("/auth"); return; }
+    if (!exp) return;
+    if (isFav) {
+      await supabase.from("favorites").delete().eq("user_id", user.id).eq("experience_id", exp.id);
+      setIsFav(false);
+      toast.success("Removed from favorites");
+    } else {
+      await supabase.from("favorites").insert({ user_id: user.id, experience_id: exp.id });
+      setIsFav(true);
+      toast.success("Added to favorites ❤️");
+    }
+  };
 
   const book = async () => {
     if (!user) { navigate("/auth", { state: { from: window.location.pathname } }); return; }
