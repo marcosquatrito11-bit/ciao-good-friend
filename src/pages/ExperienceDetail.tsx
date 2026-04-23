@@ -155,8 +155,11 @@ const ExperienceDetail = () => {
     <>
       <Navbar />
       <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-        <div className="container py-6">
+        <div className="container py-6 flex items-center justify-between">
           <Button variant="ghost" size="sm" onClick={() => navigate(-1)}><ArrowLeft className="size-4" /> Back</Button>
+          <Button variant="outline" size="sm" onClick={toggleFav}>
+            <Heart className={`size-4 ${isFav ? "fill-destructive text-destructive" : ""}`} /> {isFav ? "Saved" : "Save"}
+          </Button>
         </div>
 
         <div className="container pb-16 grid lg:grid-cols-[1fr_360px] gap-8">
@@ -195,14 +198,21 @@ const ExperienceDetail = () => {
             {profile && guide && (
               <Card>
                 <CardContent className="p-4 flex items-center gap-3">
-                  <div className="size-12 rounded-full bg-muted overflow-hidden">
-                    {profile.avatar_url && <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />}
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Hosted by</p>
-                    <p className="font-semibold">{profile.display_name ?? "Local guide"}</p>
-                    {guide.headline && <p className="text-xs text-muted-foreground">{guide.headline}</p>}
-                  </div>
+                  <Link to={`/guides/${guide.id}`} className="flex items-center gap-3 flex-1 hover:opacity-80">
+                    <div className="size-12 rounded-full bg-muted overflow-hidden">
+                      {profile.avatar_url && <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />}
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Hosted by</p>
+                      <p className="font-semibold">{profile.display_name ?? "Local guide"}</p>
+                      {guide.headline && <p className="text-xs text-muted-foreground">{guide.headline}</p>}
+                    </div>
+                  </Link>
+                  {user && user.id !== guide.user_id && (
+                    <Button size="sm" variant="outline" asChild>
+                      <Link to={`/dashboard/messages?with=${guide.user_id}`}><MessageSquare className="size-4" /> Message</Link>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             )}
