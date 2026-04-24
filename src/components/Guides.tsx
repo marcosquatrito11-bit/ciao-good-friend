@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Star, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -71,9 +72,11 @@ export const Guides = () => {
                   <span className="text-xs text-muted-foreground">
                     <strong className="text-foreground">{g.exp}</strong> {t("guides.experiences")}
                   </span>
-                  <Button size="sm" variant="ghost" className="text-primary hover:text-primary group/btn">
-                    {t("guides.viewProfile")}
-                    <ArrowRight className="!size-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                  <Button asChild size="sm" variant="ghost" className="text-primary hover:text-primary group/btn">
+                    <Link to="/experiences">
+                      {t("guides.viewProfile")}
+                      <ArrowRight className="!size-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                    </Link>
                   </Button>
                 </div>
               </div>

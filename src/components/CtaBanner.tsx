@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,11 +21,14 @@ export const CtaBanner = () => {
               {t("ctaBanner.subtitle")}
             </p>
             <Button
+              asChild
               size="lg"
               className="bg-white text-primary hover:bg-white/95 h-12 px-7 text-base font-semibold shadow-lg group"
             >
-              {t("ctaBanner.button")}
-              <ArrowRight className="!size-4 transition-transform group-hover:translate-x-1" />
+              <Link to="/become-guide">
+                {t("ctaBanner.button")}
+                <ArrowRight className="!size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
           </div>
         </div>
