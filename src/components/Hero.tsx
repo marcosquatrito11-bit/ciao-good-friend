@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ArrowRight, Star, Users, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-etna.jpg";
@@ -34,18 +35,22 @@ export const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 mb-12">
             <Button
+              asChild
               size="lg"
               className="gradient-lava text-primary-foreground border-0 shadow-lava hover:opacity-95 group h-12 px-7 text-base"
             >
-              {t("hero.ctaPrimary")}
-              <ArrowRight className="!size-4 transition-transform group-hover:translate-x-1" />
+              <Link to="/experiences">
+                {t("hero.ctaPrimary")}
+                <ArrowRight className="!size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
             <Button
+              asChild
               size="lg"
               variant="outline"
               className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 hover:text-white h-12 px-7 text-base"
             >
-              {t("hero.ctaSecondary")}
+              <Link to="/become-guide">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
 

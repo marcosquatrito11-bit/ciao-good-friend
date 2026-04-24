@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Mountain, Camera, Wine, Building2, ArrowUpRight } from "lucide-react";
 import trekkingImg from "@/assets/cat-trekking.jpg";
 import panoramicImg from "@/assets/cat-panoramic.jpg";
@@ -9,10 +10,10 @@ export const Categories = () => {
   const { t } = useTranslation();
 
   const items = [
-    { key: "trekking", icon: Mountain, img: trekkingImg },
-    { key: "panoramic", icon: Camera, img: panoramicImg },
-    { key: "food", icon: Wine, img: foodImg },
-    { key: "culture", icon: Building2, img: cultureImg },
+    { key: "trekking", icon: Mountain, img: trekkingImg, category: "hiking" },
+    { key: "panoramic", icon: Camera, img: panoramicImg, category: "photo" },
+    { key: "food", icon: Wine, img: foodImg, category: "food" },
+    { key: "culture", icon: Building2, img: cultureImg, category: "culture" },
   ] as const;
 
   return (
@@ -28,10 +29,10 @@ export const Categories = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {items.map(({ key, icon: Icon, img }) => (
-            <a
+          {items.map(({ key, icon: Icon, img, category }) => (
+            <Link
               key={key}
-              href="#"
+              to={`/experiences?category=${category}`}
               className="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-card hover:shadow-lava transition-all duration-500"
             >
               <img
@@ -59,7 +60,7 @@ export const Categories = () => {
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
