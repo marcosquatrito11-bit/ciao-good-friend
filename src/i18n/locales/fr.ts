@@ -45,7 +45,7 @@ export default {
   why: {
     title: "Pourquoi EtnaGo",
     subtitle: "Un nouveau modèle pour le tourisme local.",
-    p1: { title: "Zéro intermédiaire", desc: "Seulement 15% de commission. Vous économisez, votre guide gagne plus." },
+    p1: { title: "Zéro intermédiaire", desc: "Seulement 15% de commission, sans frais d'agence cachés. Tout est transparent : vous payez le juste prix, votre guide gagne vraiment sa vie." },
     p2: { title: "Expériences de niche", desc: "Pas de tours standards. Chaque expérience est unique." },
     p3: { title: "100% locaux vérifiés", desc: "Uniquement des guides de la province de Catane, vérifiés." },
     p4: { title: "Chat direct", desc: "Parlez directement avec votre guide. Aucun centre d'appels." },
