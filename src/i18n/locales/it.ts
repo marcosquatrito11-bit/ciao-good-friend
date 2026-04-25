@@ -57,7 +57,7 @@ export default {
   why: {
     title: "Perché EtnaGo",
     subtitle: "Il modello che cambia le regole del turismo locale.",
-    p1: { title: "Zero intermediari", desc: "Solo 15% di commissione. Risparmi tu, guadagna di più chi ti accompagna." },
+    p1: { title: "Zero intermediari", desc: "Solo 15% di commissione, zero costi nascosti d'agenzia. Tutto trasparente: tu paghi il giusto, la tua guida guadagna davvero." },
     p2: { title: "Esperienze di nicchia", desc: "Niente tour standard. Ogni esperienza è unica, costruita sui tuoi desideri." },
     p3: { title: "100% locali verificati", desc: "Solo guide della provincia di Catania, verificate e con recensioni reali." },
     p4: { title: "Chat diretta", desc: "Parli direttamente con chi ti accompagnerà. Niente call center." },
