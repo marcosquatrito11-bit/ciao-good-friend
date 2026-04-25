@@ -57,7 +57,7 @@ export default {
   why: {
     title: "Why EtnaGo",
     subtitle: "A new model that changes local tourism.",
-    p1: { title: "Zero middlemen", desc: "Just a 15% fee. You save, your guide earns more." },
+    p1: { title: "Zero middlemen", desc: "Just a 15% fee, zero hidden agency costs. Fully transparent: you pay a fair price, your guide actually earns." },
     p2: { title: "Niche experiences", desc: "No standard tours. Every experience is unique, built on your wishes." },
     p3: { title: "100% verified locals", desc: "Only guides from Catania province, verified with real reviews." },
     p4: { title: "Direct chat", desc: "Talk directly with your guide. No call centers." },
